@@ -13,26 +13,32 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	if m.Content == "~help" {
-		helpStrings := []string{
+		str := []string{
 			"`~ping`: test bot's reactivity",
 			"`~minecraft`: show the Minecraft server IP",
 			"`~rej`: draws a random photo of Rej",
 		}
-		
+
 		s.ChannelMessageSendEmbed(m.ChannelID,
 			&discordgo.MessageEmbed{
 				Type:        "rich",
 				Title:       "Quelquelle's guide",
-				Description: strings.Join(helpStrings, "\n"),
+				Description: strings.Join(str, "\n"),
 			})
 	}
 
 	if m.Content == "~ping" {
 		s.ChannelMessageSend(m.ChannelID, "Pong!")
 	}
-	
+
 	if m.Content == "~minecraft" {
-		s.ChannelMessageSend(m.ChannelID, "The Minecraft IP is `155.138.133.226`")
+		str := []string{
+			"**Minecraft server IP:** `155.138.133.226`",
+			"**World seed:** `4383755911485894549`",
+			"_Ask Finiks to be whitelisted._",
+		}
+
+		s.ChannelMessageSend(m.ChannelID, strings.Join(str, "\n"))
 	}
 
 	if m.Content == "~rej" {
